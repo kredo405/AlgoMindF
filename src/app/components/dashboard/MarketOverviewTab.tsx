@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Grid, Paper } from '@mui/material';
+import { Grid } from '@mui/material';
 import TradingPairSelector from './TradingPairSelector';
 import TradingPairsList from './TradingPairsList';
 import PriceChart from './PriceChart';

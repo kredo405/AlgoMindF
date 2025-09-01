@@ -27,7 +27,7 @@ function TabPanel(props: { children?: React.ReactNode; index: number; value: num
 }
 
 export default function Dashboard() {
-  const [stats, setStats] = useState({
+  const [stats] = useState({
     connectedExchanges: 1,
     todaySignals: 12,
     portfolioValue: 15432.50,

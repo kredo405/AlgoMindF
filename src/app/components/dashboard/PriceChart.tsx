@@ -10,6 +10,7 @@ import {
   Tooltip,
   Legend,
   TimeScale,
+  ChartData,
 } from 'chart.js';
 import 'chartjs-adapter-date-fns';
 import { Line } from 'react-chartjs-2';
@@ -47,7 +48,7 @@ const availablePairs: TradingPair[] = [
 ];
 
 export default function PriceChart({ selectedPairs }: PriceChartProps) {
-  const [chartData, setChartData] = useState<any>(null);
+  const [chartData, setChartData] = useState<ChartData<"line"> | null>(null);
 
   useEffect(() => {
     generateChartData(selectedPairs);
@@ -58,7 +59,6 @@ export default function PriceChart({ selectedPairs }: PriceChartProps) {
     
     const now = Date.now();
     const data = {
-      labels: Array.from({ length: 24 }, (_, i) => new Date(now - (23 - i) * 3600000)),
       datasets: pairs.map((pair, index) => {
         const baseValue = availablePairs.find(p => p.symbol === pair)?.price || 100;
         const multiplier = 1 + (index * 0.1);
@@ -67,7 +67,7 @@ export default function PriceChart({ selectedPairs }: PriceChartProps) {
         return {
           label: pair,
           data: Array.from({ length: 24 }, (_, i) => ({
-            x: new Date(now - (23 - i) * 3600000),
+            x: (now - (23 - i) * 3600000),
             y: baseValue * multiplier * (1 + Math.sin(i / 2) * 0.05)
           })),
           borderColor: color,
